@@ -14,3 +14,12 @@ after_success:
   - docker build -t brinduc/multi-nginx ./nginx
   - docker build -t brinduc/multi-server ./server
   - docker build -t brinduc/multi-worker ./worker
+
+  # Login to docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID"  --password-stdin
+
+  # Take those images and push to dockerhub
+  - docker push brinduc/multi-client
+  - docker push brinduc/multi-nginx
+  - docker push brinduc/multi-server
+  - docker push brinduc/multi-worker
